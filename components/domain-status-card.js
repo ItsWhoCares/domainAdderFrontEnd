@@ -17,30 +17,6 @@ import {
 } from "@/components/ui/card";
 import { CheckIcon, XIcon } from "lucide-react";
 
-const domains = [
-  {
-    name: "example.com",
-    added: true,
-    verified: true,
-    gmailActivated: true,
-    allGood: true,
-  },
-  {
-    name: "mydomain.net",
-    added: true,
-    verified: true,
-    gmailActivated: false,
-    allGood: false,
-  },
-  {
-    name: "testsite.org",
-    added: true,
-    verified: true,
-    gmailActivated: true,
-    allGood: true,
-  },
-];
-
 export default function DomainStatusCard({ status }) {
   console.log("status", status);
   return (
@@ -55,7 +31,6 @@ export default function DomainStatusCard({ status }) {
               <TableHead className="w-[200px]">Domains</TableHead>
               <TableHead>Added</TableHead>
               <TableHead>Verified</TableHead>
-              <TableHead>Gmail Activated</TableHead>
               <TableHead>All Good</TableHead>
             </TableRow>
           </TableHeader>
@@ -77,17 +52,15 @@ export default function DomainStatusCard({ status }) {
                     <XIcon className="text-red-500" />
                   )}
                 </TableCell>
-                <TableCell>
+                {/* <TableCell>
                   {status[domain].isGmail ? (
                     <CheckIcon className="text-green-500" />
                   ) : (
                     <XIcon className="text-red-500" />
                   )}
-                </TableCell>
+                </TableCell> */}
                 <TableCell>
-                  {status[domain].isGmail &&
-                  status[domain].isAdded &&
-                  status[domain].isVerified ? (
+                  {status[domain].isAdded && status[domain].isVerified ? (
                     <CheckIcon className="text-green-500" />
                   ) : (
                     <XIcon className="text-red-500" />

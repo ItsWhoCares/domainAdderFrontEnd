@@ -56,10 +56,16 @@ function handleSL(emailRef, passRef, cemailRef, cpassRef) {
   });
 }
 
-function handleEB(emailRef, passRef, cemailRef, cpassRef, fnameRef) {
+function handleEB(emailRef, passRef, cemailRef, cpassRef, fnameRef, ebUrlRef) {
   let tempEmail = cemailRef.current.value;
   let tempPass = cpassRef.current.value;
   let tempName = fnameRef.current.value;
+  let ebUrl = ebUrlRef.current.value;
+
+  if (ebUrl == "" || ebUrl == null) {
+    alert("Please enter Emailbison URL");
+    return;
+  }
   //   console.log(tempEmail);
   //   console.log(tempPass);
   if (tempEmail == "" || tempPass == "" || tempName == "") {
@@ -90,6 +96,7 @@ function handleEB(emailRef, passRef, cemailRef, cpassRef, fnameRef) {
   let all = {
     emailbison_email: acc_email,
     emailbison_password: acc_pass,
+    url: ebUrl,
     accounts: send,
   };
   // console.log(all);
@@ -146,6 +153,7 @@ export default function SI({ setStatus }) {
   const cpassRef = useRef();
   const orgRef = useRef();
   const fnameRef = useRef();
+  const ebUrlRef = useRef();
 
   const [isRunning, setIsRunning] = IsRunning(true);
   return (
@@ -179,6 +187,10 @@ export default function SI({ setStatus }) {
                   <div className="space-y-2">
                     <Label htmlFor="password">Password</Label>
                     <Input id="password" type="password" ref={passRef} />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="text">Emailbison URL</Label>
+                    <Input id="eb_url" type="text" ref={ebUrlRef} />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="text">Organisation Name (Optional)</Label>
@@ -233,7 +245,14 @@ export default function SI({ setStatus }) {
           disabled={isRunning}
           onClick={() => {
             setIsRunning(true);
-            handleEB(emailRef, passRef, cemailRef, cpassRef, fnameRef);
+            handleEB(
+              emailRef,
+              passRef,
+              cemailRef,
+              cpassRef,
+              fnameRef,
+              ebUrlRef
+            );
           }}>
           {isRunning ? "Running" : "Add To Emailbison"}
         </Button>
